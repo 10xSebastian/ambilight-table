@@ -1,0 +1,11 @@
+.ambilight-container {
+  background: whitesmoke;
+  display: block;
+  height: 100%;
+  width: 100%;
+  text-align: center; }
+
+.ambilight-image {
+  max-height: 94%;
+  top: 3%;
+  position: relative; }
