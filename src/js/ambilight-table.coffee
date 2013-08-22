@@ -9,11 +9,10 @@ class AmbilightTable
   currentID = 0
 
   constructor:(element, options)->
-    @element = $ element
-    @images = @element.find "img"
+    @el = $ element
+    @images = @el.find "img"
     do @prepareImages
-    do @delegateEvents
-    @setImage 0
+    do @preloadImages
 
   activateImage: (image)->
     do @deactivateCurrentImage
@@ -28,7 +27,8 @@ class AmbilightTable
     canvas = $ "<canvas id='ambilight-canvas-#{id}' class='ambilight-canvas'></canvas>"
     image.data "_ambilightCanvas", canvas
     image.data("_ambilightContainer").prepend canvas
-    stackBlurImage "ambilight-image-#{id}", "ambilight-canvas-#{id}", 100, true
+    canvasImage = new CanvasImage canvas[0], image[0]
+    canvasImage.blur 8
 
   delegateEvents: =>
     $(document).on "keydown", @onKeydown
@@ -52,6 +52,16 @@ class AmbilightTable
         do @nextImage
       when 39 # right
         do @nextImage
+
+  preloadImages: =>
+    imagesLoaded = []
+    @images.on "load", (e)=>
+      image = $(e.currentTarget)
+      @setImage 0 if @images.index(image) == 0
+      imagesLoaded.push image
+      if @images.length == imagesLoaded.length
+        do @delegateEvents
+        @el.trigger "allAmbilightImagesLoaded"
 
   prepareImages: ->
     for image in @images
