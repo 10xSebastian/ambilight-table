@@ -30,8 +30,9 @@
 .ambilight-canvas {
   position: absolute;
   margin: 0 auto;
-  opacity: 0.4;
-  filter: alpha(opacity=40);
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+  top: 45%;
   -webkit-transform: scale(4);
   -ms-transform: scale(4);
   transform: scale(4); }
