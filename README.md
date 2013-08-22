@@ -5,8 +5,9 @@ Image gallery written in javascript. Displaying images on a light table with amb
 
 Preview
 ---------------
+[Live Demo](http://spape.github.io/ambilight-table/)
+
 ![Example](https://raw.github.com/spape/ambilight-table/master/example.png)
-http://spape.github.io/ambilight-table/
 
 Dear Contributor
 ---------------
