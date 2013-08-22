@@ -11,4 +11,4 @@ Preview
 
 Dear Contributor
 ---------------
-You should get a look at the compiling.sh (for UNIX) to have an easy way to convert all src files (sass, coffee, haml etc.) at once.
+You should get a look at the compiling.sh (for UNIX) to have an easy way to convert all src files (sass, coffee, haml etc.) at once. You could also use guard, so that everything compiles automaticly while developing.
