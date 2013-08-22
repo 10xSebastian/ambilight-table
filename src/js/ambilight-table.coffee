@@ -89,13 +89,7 @@ class window.Ambilight.Table
 
   setDefaults: (options = {})->
     options.renderMethod ?= "background"
-    options.strength ?= switch options.renderMethod
-      when "background"
-        10
-      when "border"
-        10
-      else
-        5
+    options.strength ?= 10
     options
 
   setImage: (index)->

@@ -1,5 +1,5 @@
 window.Ambilight ?= {}
 class window.Ambilight.Border
 
-  constructor: ->
-    console.log "new ambilight border"
+  constructor: (image, canvas, strength)->
+    console.log "WIP"
