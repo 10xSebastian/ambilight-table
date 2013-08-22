@@ -2,6 +2,9 @@
 (function() {
 
   jQuery(function() {
+    jQuery(function() {
+      return $(".ambilight-table").ambilight();
+    });
     return $(document).on("keydown", function(e) {
       if ([37, 38, 39, 40].indexOf(e.keyCode) > -1) {
         return $("#instructions").fadeOut();
