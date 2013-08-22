@@ -2,15 +2,17 @@ $ = jQuery
 
 $.extend $.fn, ambilight: (options)-> 
   @each -> 
-    $(this).data('_ambilightTable', new AmbilightTable(this, options)) unless $(this).data("_ambilightTable")?
+    $(this).data('_ambilightTable', new window.Ambilight.Table(this, options)) unless $(this).data("_ambilightTable")?
 
-class AmbilightTable
+window.Ambilight ?= {}
+class window.Ambilight.Table
   
   currentID = 0
 
   constructor:(element, options)->
     @el = $ element
     @images = @el.find "img"
+    @options = @setDefaults options
     do @prepareImages
     do @preloadImages
 
@@ -27,8 +29,15 @@ class AmbilightTable
     canvas = $ "<canvas id='ambilight-canvas-#{id}' class='ambilight-canvas'></canvas>"
     image.data "_ambilightCanvas", canvas
     image.data("_ambilightContainer").prepend canvas
-    canvasImage = new CanvasImage canvas[0], image[0]
-    canvasImage.blur 8
+    @wrapTable canvas
+    @convertImage image, canvas
+
+  convertImage: (image, canvas)->
+    switch @options.renderMethod
+      when "background"
+        new window.Ambilight.Background image, canvas, @options.strength
+      when "border"
+        new window.Ambilight.Border image, canvas, @options.strength
 
   delegateEvents: =>
     $(document).on "keydown", @onKeydown
@@ -71,16 +80,28 @@ class AmbilightTable
       image.attr "id", "ambilight-image-#{image.data("id")}"
       image.wrap $ "<div class='ambilight-image-container'></div>"
       image.data "_ambilightContainer", image.closest ".ambilight-image-container"
-      image.wrap $ "<div class='ambilight-image-table'></div>"
-      image.wrap $ "<div class='ambilight-image-cell'></div>"
+      @wrapTable image
 
   previousImage: ->
     newIndex = @images.index(@currentImage)-1
     newIndex = @images.length-1 if newIndex < 0
     @setImage newIndex
 
+  setDefaults: (options = {})->
+    options.renderMethod ?= "background"
+    options.strength ?= switch options.renderMethod
+      when "background"
+        10
+      when "border"
+        10
+      else
+        5
+    options
+
   setImage: (index)->
     @activateImage @images[index]
     @blurImage @images[index]
 
-jQuery -> do $(".ambilight-table").ambilight
+  wrapTable: (element)->
+    element.wrap $ "<div class='ambilight-image-table'></div>"
+    element.wrap $ "<div class='ambilight-image-cell'></div>"
