@@ -12,7 +12,7 @@ class window.Ambilight.Background
     do @render
 
   render: =>
-    @context.globalAlpha = 0.5
+    @context.globalAlpha = 0.2
     y = -@strength
     while y <= @strength
       x = -@strength
@@ -22,5 +22,5 @@ class window.Ambilight.Background
         x += 2
       y += 2
     @context.globalAlpha = 1.0
-    $(@canvas).css "transform", "scale(4)"
+    $(@canvas).css "transform", "scale(3)"
     $(@canvas).css "opacity", "0.6"
