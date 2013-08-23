@@ -15,7 +15,7 @@
 
 .ambilight-image-table {
   display: table;
-  position: relative; }
+  position: absolute; }
 
 .ambilight-image-cell {
   display: table-cell;
@@ -26,13 +26,3 @@
   -moz-box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); }
-
-.ambilight-canvas {
-  position: absolute;
-  margin: 0 auto;
-  opacity: 0.5;
-  filter: alpha(opacity=50);
-  top: 45%;
-  -webkit-transform: scale(4);
-  -ms-transform: scale(4);
-  transform: scale(4); }
